@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Mahi 💜</title>
+<title>A Little Surprise 💗</title>
 
 <style>
 * {
@@ -12,379 +12,773 @@
   padding: 0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #160025, #4b146e, #8e44ad);
-  color: white;
-  text-align: center;
-  min-height: 100vh;
-  overflow-x: hidden;
+html {
+  scroll-behavior: smooth;
 }
 
-section {
+body {
+  font-family: Arial, sans-serif;
   min-height: 100vh;
-  padding: 70px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #18001f, #4b1768, #111b55, #7c245f);
+  background-size: 400% 400%;
+  animation: backgroundMove 12s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.screen {
+  display: none;
+  position: absolute;
+  inset: 0;
+  min-height: 100vh;
+  padding: 25px;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.screen.active {
+  display: flex;
+  animation: screenIn 0.8s ease;
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card {
+  width: min(92%, 500px);
+  padding: 30px 22px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
 h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
+  font-size: clamp(38px, 11vw, 70px);
+  margin-bottom: 15px;
+  text-shadow: 0 0 25px rgba(255,255,255,0.7);
 }
 
 h2 {
-  font-size: 30px;
+  font-size: clamp(28px, 8vw, 48px);
   margin-bottom: 18px;
 }
 
-p {
-  max-width: 650px;
-  line-height: 1.7;
-  font-size: 18px;
+h3 {
+  font-size: 25px;
+  margin-bottom: 15px;
 }
 
-.glow {
-  text-shadow: 0 0 15px #e5b3ff, 0 0 30px #c56cff;
+p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 12px 0;
+}
+
+.small {
+  opacity: 0.8;
+  font-size: 14px;
 }
 
 button {
   border: none;
   padding: 15px 28px;
-  margin-top: 30px;
-  border-radius: 30px;
-  background: white;
-  color: #7024a0;
+  margin-top: 22px;
+  border-radius: 999px;
   font-size: 17px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(255,255,255,.4);
+  color: #4b1768;
+  background: white;
+  box-shadow: 0 0 25px rgba(255,255,255,0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:active {
-  transform: scale(.95);
+  transform: scale(0.92);
 }
 
-/* Floating hearts */
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(255,255,255,0.8);
+}
+
+/* Stars */
+.star {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.6;
+  animation: twinkle 2s infinite alternate;
+  z-index: 1;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* Pink floating hearts */
 .heart {
   position: fixed;
-  bottom: -30px;
+  bottom: -50px;
   font-size: 25px;
-  animation: floatUp 6s linear infinite;
-  opacity: .8;
+  color: #ff4fa3;
+  filter: drop-shadow(0 0 8px #ff4fa3);
   pointer-events: none;
+  z-index: 2;
+  animation: floatHeart linear infinite;
 }
 
-@keyframes floatUp {
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-55vh) rotate(15deg) scale(1);
+  }
+  100% {
+    transform: translateY(-115vh) rotate(-20deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Gift */
+.gift {
+  font-size: 110px;
+  animation: giftShake 2s infinite;
+  cursor: pointer;
+}
+
+@keyframes giftShake {
+  0%, 80%, 100% { transform: rotate(0); }
+  84% { transform: rotate(-7deg); }
+  88% { transform: rotate(7deg); }
+  92% { transform: rotate(-5deg); }
+  96% { transform: rotate(5deg); }
+}
+
+/* Birthday text */
+.birthday {
+  animation: birthdayGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes birthdayGlow {
   from {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
+    text-shadow: 0 0 10px white;
   }
-  20% { opacity: 1; }
   to {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
+    text-shadow: 0 0 35px #ff70c0, 0 0 60px #9b7cff;
   }
+}
+
+/* Balloons */
+.balloons {
+  font-size: 55px;
+  letter-spacing: 8px;
+  animation: balloonsFloat 3s ease-in-out infinite;
+}
+
+@keyframes balloonsFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
 }
 
 /* Cake */
 .cake {
-  position: relative;
-  width: 180px;
-  height: 130px;
-  margin: 25px;
+  font-size: 110px;
+  animation: cakeBounce 1.5s ease-in-out infinite;
 }
 
-.layer {
-  position: absolute;
-  width: 180px;
-  height: 50px;
-  background: #d69bea;
-  border-radius: 15px;
-  left: 0;
+@keyframes cakeBounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
-.layer.one { bottom: 0; }
-.layer.two {
-  bottom: 38px;
-  width: 150px;
-  left: 15px;
-}
-.layer.three {
-  bottom: 76px;
-  width: 120px;
-  left: 30px;
+.candles {
+  font-size: 50px;
+  margin-top: -15px;
 }
 
-.candle {
-  position: absolute;
-  width: 12px;
-  height: 38px;
-  background: #fff;
-  left: 84px;
-  top: -20px;
+/* Timeline */
+.timeline {
+  margin-top: 20px;
+  text-align: left;
 }
 
-.flame {
-  position: absolute;
-  width: 18px;
-  height: 25px;
-  background: orange;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  left: 81px;
-  top: -45px;
-  box-shadow: 0 0 20px yellow;
-  animation: flicker .6s infinite alternate;
+.timeline-item {
+  padding: 18px;
+  margin: 12px 0;
+  border-left: 4px solid #ff75b9;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  animation: slideUp 0.7s ease both;
 }
 
-@keyframes flicker {
-  from { transform: rotate(-45deg) scale(1); }
-  to { transform: rotate(-45deg) scale(1.15); }
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.card {
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.25);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  padding: 30px;
-  max-width: 700px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+/* Chat */
+.chat {
+  text-align: left;
+  margin-top: 20px;
 }
 
-.hidden {
-  display: none;
+.message {
+  max-width: 85%;
+  padding: 13px 17px;
+  margin: 12px 0;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  animation: messagePop 0.5s ease both;
 }
 
-.final {
-  background: linear-gradient(135deg, #3b0a54, #8e44ad);
+.message:nth-child(even) {
+  margin-left: auto;
+  background: rgba(255,105,180,0.25);
 }
 
-#confetti {
+@keyframes messagePop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Cards game */
+.game-cards {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.game-card {
+  width: 80px;
+  height: 110px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #ff5eaa, #725cff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+
+.game-card:active {
+  transform: rotateY(180deg) scale(1.08);
+}
+
+/* Letter */
+.letter {
+  min-height: 250px;
+  text-align: left;
+  white-space: pre-line;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* Confetti */
+.confetti {
   position: fixed;
-  inset: 0;
+  width: 10px;
+  height: 16px;
+  top: -30px;
+  z-index: 100;
   pointer-events: none;
-  z-index: 999;
+  animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(115vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Tap sparkle */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 20px;
+  z-index: 200;
+  animation: sparklePop 0.8s ease forwards;
+}
+
+@keyframes sparklePop {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8) translateY(-30px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .card {
+    padding: 25px 17px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .gift,
+  .cake {
+    font-size: 90px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="confetti"></canvas>
+<!-- STARS -->
+<div class="star" style="left:10%;top:15%;animation-delay:.2s"></div>
+<div class="star" style="left:25%;top:35%;animation-delay:1s"></div>
+<div class="star" style="left:42%;top:12%;animation-delay:.5s"></div>
+<div class="star" style="left:60%;top:28%;animation-delay:1.4s"></div>
+<div class="star" style="left:78%;top:15%;animation-delay:.8s"></div>
+<div class="star" style="left:90%;top:45%;animation-delay:1.2s"></div>
+<div class="star" style="left:18%;top:75%;animation-delay:.7s"></div>
+<div class="star" style="left:70%;top:80%;animation-delay:1.5s"></div>
 
-<!-- Opening -->
-<section>
+<!-- 1 OPENING -->
+<section class="screen active" id="s1">
   <div class="card">
-    <h1 class="glow">Hey Mahi 💜</h1>
-    <p>
-      Someone made a tiny little corner of the internet
-      just for you... 👀✨
-    </p>
-
-    <button onclick="nextSection()">
-      Open Your Surprise 🎁
-    </button>
+    <div style="font-size:55px">✨</div>
+    <h2>Preparing something special...</h2>
+    <p>There is a little surprise waiting for you.</p>
+    <p class="small">Made especially for my Bestie 💗</p>
+    <button onclick="go(2)">I'm Ready 👀</button>
   </div>
 </section>
 
-<!-- Birthday -->
-<section id="birthday">
+<!-- 2 GIFT -->
+<section class="screen" id="s2">
   <div class="card">
-    <h1 class="glow">🎂 HAPPY BIRTHDAY 🎂</h1>
+    <div class="gift" onclick="openGift()">🎁</div>
+    <h2>Something is waiting...</h2>
+    <p>Tap the gift to open it.</p>
+    <button onclick="openGift()">OPEN 🎁</button>
+  </div>
+</section>
 
-    <div class="cake">
-      <div class="flame"></div>
-      <div class="candle"></div>
-      <div class="layer three"></div>
-      <div class="layer two"></div>
-      <div class="layer one"></div>
+<!-- 3 BIRTHDAY -->
+<section class="screen" id="s3">
+  <div class="card">
+    <div class="balloons">🎈 🎈 🎈</div>
+    <h1 class="birthday">HAPPY<br>BIRTHDAY</h1>
+    <h2>BESTIE 💗</h2>
+    <p>Today is all about celebrating you! ✨</p>
+    <button onclick="go(4)">Continue ✨</button>
+  </div>
+</section>
+
+<!-- 4 LIGHTS -->
+<section class="screen" id="s4">
+  <div class="card">
+    <div style="font-size:65px">💡</div>
+    <h2>One little thing...</h2>
+    <p>Let's turn on the lights. ✨</p>
+    <button onclick="lightsOn()">TURN ON THE LIGHTS 💡</button>
+  </div>
+</section>
+
+<!-- 5 CAKE -->
+<section class="screen" id="s5">
+  <div class="card">
+    <div class="cake">🎂</div>
+    <div class="candles" id="candles">🕯️🕯️🕯️</div>
+    <h2>Make a Wish ✨</h2>
+    <p>Tap the candles to blow them out!</p>
+    <button onclick="blowCandles()">Make a Wish 🕯️</button>
+  </div>
+</section>
+
+<!-- 6 TIMELINE -->
+<section class="screen" id="s6">
+  <div class="card">
+    <h2>Our Friendship 💗</h2>
+    <p>Some things are worth remembering...</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        📅 <b>12 November</b><br>
+        A special date in our friendship story.
+      </div>
+
+      <div class="timeline-item">
+        💬 <b>The Chats</b><br>
+        From random conversations to conversations that somehow last forever. 😂
+      </div>
+
+      <div class="timeline-item">
+        🫶 <b>The Little Things</b><br>
+        Sometimes the smallest moments become the best memories.
+      </div>
+
+      <div class="timeline-item">
+        ✨ <b>And the story continues...</b><br>
+        More laughs, more conversations and more memories ahead.
+      </div>
     </div>
 
-    <h2>Mahi 💜</h2>
+    <button onclick="go(7)">Next 💬</button>
+  </div>
+</section>
 
-    <p>
-      Today is your day! ✨<br>
-      I hope your birthday is filled with happiness,
-      laughter, good memories and lots of cake. 🎉
-    </p>
+<!-- 7 CHAT -->
+<section class="screen" id="s7">
+  <div class="card">
+    <h2>The Chatting Chapter 💬</h2>
+    <p>Because apparently we can talk about absolutely anything. 😂</p>
 
-    <button onclick="celebrate()">
-      Make Some Noise 🎉
+    <div class="chat">
+      <div class="message">💬 Random conversation...</div>
+      <div class="message">😂 Random laughter...</div>
+      <div class="message">💬 Another conversation...</div>
+      <div class="message">✨ And somehow the chat never ends.</div>
+    </div>
+
+    <button onclick="go(8)">Next 🎮</button>
+  </div>
+</section>
+
+<!-- 8 GAME -->
+<section class="screen" id="s8">
+  <div class="card">
+    <h2>Pick a Card 🃏</h2>
+    <p>Choose one. Let's see what you get! 👀</p>
+
+    <div class="game-cards">
+      <div class="game-card" onclick="pickCard(1)">✨</div>
+      <div class="game-card" onclick="pickCard(2)">💗</div>
+      <div class="game-card" onclick="pickCard(3)">🎂</div>
+    </div>
+
+    <p id="cardResult"></p>
+
+    <button id="letterBtn" style="display:none" onclick="go(9)">
+      Open Your Letter 💌
     </button>
   </div>
 </section>
 
-<!-- Friendship -->
-<section>
+<!-- 9 LETTER -->
+<section class="screen" id="s9">
   <div class="card">
-    <h2>Our Friendship 💜</h2>
+    <div style="font-size:55px">💌</div>
+    <h2>A Little Message</h2>
 
-    <p>
-      From random online chats to talking about completely
-      random things... somehow those little conversations
-      became some of the best parts of my days. 😂💬
-      <br><br>
-      And then there's shopping. 🛍️
-      Because apparently going shopping together is
-      another adventure entirely. 😭😂
-    </p>
+    <div class="letter" id="letter"></div>
+
+    <button onclick="go(10)">Continue 🌌</button>
   </div>
 </section>
 
-<!-- Fun -->
-<section>
+<!-- 10 FINAL WISH -->
+<section class="screen" id="s10">
   <div class="card">
-    <h2>Things That Make Our Friendship Special ✨</h2>
+    <div style="font-size:60px">🌌</div>
+    <h2>One Last Thing...</h2>
 
     <p>
-      💬 Random conversations<br><br>
-      😂 Laughing at stupid things<br><br>
-      🛍️ Going shopping<br><br>
-      😭 Saying things that make absolutely no sense<br><br>
-      💜 And simply being there for each other
+      I hope this new year brings you<br>
+      countless reasons to smile,<br>
+      amazing memories,<br>
+      and lots of happiness. ✨
     </p>
 
-    <button onclick="showMessage()">
-      One More Thing 👀
-    </button>
-
-    <p id="secret" class="hidden" style="margin-top:25px;">
-      You're genuinely an amazing friend, Mahi. 💜
-      Never forget that.
+    <p>
+      Keep smiling, keep being yourself,<br>
+      and have an absolutely amazing birthday! 💗
     </p>
+
+    <h2>Happy Birthday, Bestie 💗</h2>
+
+    <button onclick="go(11)">One Last Surprise 🎉</button>
   </div>
 </section>
 
-<!-- Final -->
-<section class="final">
+<!-- 11 CELEBRATION -->
+<section class="screen" id="s11">
   <div class="card">
-    <h1 class="glow">💜 Once Again... 💜</h1>
+    <div style="font-size:70px">🎉</div>
+    <h1 class="birthday">CELEBRATE!</h1>
+    <h2>BESTIE 💗</h2>
+    <p>Because today deserves a LOT of confetti. 😂</p>
 
-    <h2>Happy Birthday Mahi! 🎂</h2>
+    <button onclick="celebrate()">🎉 CELEBRATE 🎉</button>
 
-    <p>
-      I hope this new year of your life brings you
-      countless reasons to smile, amazing memories,
-      and lots of happiness.
-      <br><br>
-      Keep smiling, keep being yourself,
-      and have an absolutely amazing birthday! ✨
-      <br><br>
-      — Your Best Friend 💜
-    </p>
-
-    <button onclick="celebrate()">
-      🎉 Celebrate!
-    </button>
+    <p id="finalText"></p>
   </div>
 </section>
 
 <script>
 
-/* Scroll to birthday section */
-function nextSection() {
-  document.getElementById("birthday")
-    .scrollIntoView({ behavior: "smooth" });
+/* SCREEN NAVIGATION */
+function go(number) {
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById("s" + number).classList.add("active");
 }
 
-/* Show extra message */
-function showMessage() {
-  document.getElementById("secret")
-    .classList.remove("hidden");
+/* GIFT */
+function openGift() {
+  burst();
+  setTimeout(() => {
+    go(3);
+  }, 600);
 }
 
-/* Floating hearts */
+/* LIGHTS */
+function lightsOn() {
+  document.body.style.background =
+    "linear-gradient(135deg,#5b1b78,#b43f83,#5968d9,#e77bb8)";
+  
+  document.body.style.backgroundSize = "400% 400%";
+  document.body.style.animation = "backgroundMove 8s ease infinite";
+
+  burst();
+
+  setTimeout(() => {
+    go(5);
+  }, 700);
+}
+
+/* CANDLES */
+function blowCandles() {
+  document.getElementById("candles").textContent = "✨✨✨";
+  burst();
+  confetti(35);
+
+  setTimeout(() => {
+    go(6);
+  }, 900);
+}
+
+/* CARD GAME */
+function pickCard(card) {
+
+  const messages = [
+    "✨ You picked the sparkle card! Keep shining!",
+    "💗 You picked the heart card! Bestie energy unlocked!",
+    "🎂 You picked the cake card! Birthday mode activated!"
+  ];
+
+  document.getElementById("cardResult").textContent = messages[card - 1];
+
+  burst();
+
+  document.getElementById("letterBtn").style.display = "inline-block";
+}
+
+/* LETTER TYPEWRITER */
+const letterText =
+`Dear Bestie 💗
+
+Today is your special day, so I just wanted to remind you how lucky I am to have a friendship filled with chats, laughs and memories.
+
+From our online conversations to going shopping together, there are so many little moments that make our friendship special.
+
+I hope you have an amazing birthday and an even more amazing year ahead.
+
+Keep smiling, keep being yourself, and never forget how awesome you are. ✨
+
+Happy Birthday, Bestie! 🎂💗`;
+
+let typed = false;
+
+function typeLetter() {
+
+  if (typed) return;
+
+  typed = true;
+
+  const box = document.getElementById("letter");
+  let i = 0;
+
+  function type() {
+    if (i < letterText.length) {
+      box.textContent += letterText.charAt(i);
+      i++;
+      setTimeout(type, 25);
+    }
+  }
+
+  type();
+}
+
+/* Detect when letter screen opens */
+const originalGo = go;
+
+go = function(number) {
+  originalGo(number);
+
+  if (number === 9) {
+    setTimeout(typeLetter, 300);
+  }
+};
+
+/* CELEBRATION */
+function celebrate() {
+
+  confetti(150);
+  burstMany();
+
+  document.getElementById("finalText").textContent =
+    "🎊 HAPPY BIRTHDAY, BESTIE! 💗🎂✨";
+}
+
+/* CONFETTI */
+function confetti(amount) {
+
+  const emojis = ["🎉","✨","💗","🎊","⭐"];
+
+  for (let i = 0; i < amount; i++) {
+
+    const piece = document.createElement("div");
+
+    piece.className = "confetti";
+
+    piece.textContent =
+      emojis[Math.floor(Math.random() * emojis.length)];
+
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.animationDuration =
+      (2 + Math.random() * 2) + "s";
+
+    piece.style.fontSize =
+      (12 + Math.random() * 18) + "px";
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+
+/* SPARKLE BURST */
+function burst() {
+
+  for (let i = 0; i < 15; i++) {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+    sparkle.textContent = "✨";
+
+    sparkle.style.left =
+      (40 + Math.random() * 20) + "vw";
+
+    sparkle.style.top =
+      (35 + Math.random() * 30) + "vh";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 900);
+  }
+}
+
+function burstMany() {
+
+  for (let i = 0; i < 5; i++) {
+    setTimeout(burst, i * 250);
+  }
+}
+
+/* TAP SPARKLES */
+document.addEventListener("click", function(e) {
+
+  const sparkle = document.createElement("div");
+
+  sparkle.className = "sparkle";
+  sparkle.textContent = "✨";
+
+  sparkle.style.left = e.clientX + "px";
+  sparkle.style.top = e.clientY + "px";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 800);
+});
+
+/* FLOATING PINK HEARTS */
 function createHeart() {
+
   const heart = document.createElement("div");
+
   heart.className = "heart";
+  heart.textContent = "♥";
 
-  const hearts = ["💜", "💖", "✨", "💫"];
-  heart.innerHTML =
-    hearts[Math.floor(Math.random() * hearts.length)];
+  heart.style.left =
+    Math.random() * 100 + "vw";
 
-  heart.style.left = Math.random() * 100 + "vw";
   heart.style.animationDuration =
-    (4 + Math.random() * 4) + "s";
+    (5 + Math.random() * 5) + "s";
+
+  heart.style.fontSize =
+    (18 + Math.random() * 20) + "px";
 
   document.body.appendChild(heart);
 
-  setTimeout(() => heart.remove(), 8000);
+  setTimeout(() => heart.remove(), 11000);
 }
 
 setInterval(createHeart, 700);
-
-
-/* Confetti */
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-let pieces = [];
-
-function celebrate() {
-
-  for (let i = 0; i < 160; i++) {
-    pieces.push({
-      x: Math.random() * canvas.width,
-      y: -10,
-      size: Math.random() * 8 + 4,
-      speed: Math.random() * 5 + 3,
-      rotation: Math.random() * 360,
-      rotationSpeed: Math.random() * 8 - 4
-    });
-  }
-
-  animateConfetti();
-}
-
-function animateConfetti() {
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  pieces.forEach((p, index) => {
-
-    p.y += p.speed;
-    p.rotation += p.rotationSpeed;
-
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rotation * Math.PI / 180);
-
-    ctx.fillStyle =
-      ["#ffffff", "#e0aaff", "#ffb3ff", "#ffd6ff"]
-      [index % 4];
-
-    ctx.fillRect(
-      -p.size / 2,
-      -p.size / 2,
-      p.size,
-      p.size
-    );
-
-    ctx.restore();
-  });
-
-  pieces = pieces.filter(
-    p => p.y < canvas.height + 20
-  );
-
-  if (pieces.length > 0) {
-    requestAnimationFrame(animateConfetti);
-  }
-}
 
 </script>
 
 </body>
   </html>
+
+    
