@@ -3,778 +3,532 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Mahi 🤍</title>
+
+<title>Bestie Birthday V3 🤍</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Parisienne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+html,body{
+  width:100%;
+  min-height:100%;
 }
 
-body {
-  overflow: hidden;
-  background: #fff;
-  color: #343038;
-  font-family: "Inter", sans-serif;
+body{
+  font-family:Inter,sans-serif;
+  color:#39333a;
+  overflow:hidden;
+  background:#fff;
 }
 
-/* ---------- BACKGROUND ---------- */
+/* BACKGROUND */
 
-.background {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+.background{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  overflow:hidden;
   background:
-    radial-gradient(circle at 15% 20%, rgba(255,190,210,.35), transparent 30%),
-    radial-gradient(circle at 85% 25%, rgba(205,190,255,.35), transparent 30%),
-    radial-gradient(circle at 50% 90%, rgba(190,225,255,.35), transparent 35%),
+    radial-gradient(circle at 10% 20%,rgba(255,190,215,.38),transparent 30%),
+    radial-gradient(circle at 90% 25%,rgba(210,195,255,.38),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(190,225,255,.35),transparent 35%),
     #fff;
-  z-index: 0;
 }
 
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(45px);
-  opacity: .45;
-  animation: blobFloat 12s ease-in-out infinite alternate;
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(45px);
+  opacity:.35;
+  animation:floatBlob 9s ease-in-out infinite alternate;
 }
 
-.blob.one {
-  width: 220px;
-  height: 220px;
-  background: #ffd1df;
-  left: -70px;
-  top: 10%;
+.blob.one{
+  width:230px;
+  height:230px;
+  background:#ffc5dd;
+  top:5%;
+  left:-70px;
 }
 
-.blob.two {
-  width: 260px;
-  height: 260px;
-  background: #ddd2ff;
-  right: -90px;
-  top: 25%;
-  animation-delay: 2s;
+.blob.two{
+  width:250px;
+  height:250px;
+  background:#d9c7ff;
+  right:-80px;
+  top:25%;
+  animation-delay:2s;
 }
 
-.blob.three {
-  width: 200px;
-  height: 200px;
-  background: #d1edff;
-  left: 30%;
-  bottom: -80px;
-  animation-delay: 4s;
+.blob.three{
+  width:260px;
+  height:260px;
+  background:#c5e8ff;
+  bottom:-100px;
+  left:25%;
+  animation-delay:4s;
 }
 
-@keyframes blobFloat {
-  from {
-    transform: translate(0,0) scale(1);
+@keyframes floatBlob{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(25px,-20px) scale(1.08)}
+}
+
+/* HEARTS */
+
+.heart{
+  position:fixed;
+  bottom:-30px;
+  color:#ff8fba;
+  font-size:18px;
+  pointer-events:none;
+  z-index:20;
+  animation:rise linear forwards;
+  text-shadow:0 0 12px rgba(255,143,186,.5);
+}
+
+@keyframes rise{
+  0%{
+    transform:translateY(0) scale(.7);
+    opacity:0;
   }
-  to {
-    transform: translate(35px,-25px) scale(1.12);
-  }
-}
-
-/* ---------- PETALS ---------- */
-
-.petal {
-  position: fixed;
-  top: -30px;
-  width: 12px;
-  height: 18px;
-  background: #ffc1d7;
-  border-radius: 100% 0 100% 0;
-  opacity: .55;
-  pointer-events: none;
-  z-index: 3;
-  animation: petalFall linear forwards;
-}
-
-@keyframes petalFall {
-  0% {
-    transform: translateY(-30px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(110vh) translateX(70px) rotate(540deg);
-    opacity: 0;
+  15%{opacity:.8}
+  100%{
+    transform:translateY(-110vh) translateX(var(--drift)) scale(1.2);
+    opacity:0;
   }
 }
 
-/* ---------- HEARTS ---------- */
+/* SCREENS */
 
-.heart {
-  position: fixed;
-  bottom: -40px;
-  color: #ff72ad;
-  font-size: 22px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 4;
-  animation: heartFloat linear forwards;
-  filter: drop-shadow(0 3px 8px rgba(255,114,173,.35));
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(25px) scale(.98);
+  transition:
+    opacity .7s ease,
+    transform .7s ease,
+    visibility .7s;
+  overflow-y:auto;
 }
 
-@keyframes heartFloat {
-  0% {
-    transform: translateY(0) scale(.7);
-    opacity: 0;
-  }
-
-  15% {
-    opacity: .75;
-  }
-
-  100% {
-    transform: translateY(-110vh) translateX(45px) scale(1.05);
-    opacity: 0;
-  }
+.screen.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
 }
 
-/* ---------- SPARKLES ---------- */
-
-.sparkle {
-  position: fixed;
-  pointer-events: none;
-  color: #d7a7ff;
-  z-index: 20;
-  animation: sparkle 900ms ease-out forwards;
+.content{
+  width:min(700px,100%);
+  text-align:center;
+  animation:appear .8s ease both;
 }
 
-@keyframes sparkle {
-  0% {
-    transform: scale(0) rotate(0);
-    opacity: 1;
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(25px);
   }
-
-  60% {
-    transform: scale(1.3) rotate(120deg);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(0) rotate(240deg) translateY(-25px);
-    opacity: 0;
+  to{
+    opacity:1;
+    transform:translateY(0);
   }
 }
 
-/* ---------- SCREENS ---------- */
+/* TYPOGRAPHY */
 
-.screen {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-  z-index: 10;
-  overflow-y: auto;
+.eyebrow{
+  letter-spacing:6px;
+  text-transform:uppercase;
+  font-size:12px;
+  color:#a8959f;
+  margin-bottom:22px;
 }
 
-.screen.active {
-  display: flex;
-  animation: screenIn 900ms cubic-bezier(.2,.8,.2,1);
+h1,h2{
+  font-family:"Cormorant Garamond",serif;
 }
 
-@keyframes screenIn {
-  from {
-    opacity: 0;
-    transform: scale(1.03) translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+h1{
+  font-size:clamp(60px,13vw,105px);
+  line-height:.85;
+  font-weight:500;
 }
 
-.content {
-  width: min(92vw, 620px);
-  text-align: center;
+h2{
+  font-size:clamp(42px,9vw,70px);
+  font-weight:500;
+  margin-bottom:20px;
 }
 
-.eyebrow {
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  font-size: 11px;
-  color: #9b7e91;
-  margin-bottom: 18px;
+.subtitle{
+  color:#746c73;
+  line-height:1.8;
+  font-size:16px;
+  margin:18px auto;
+  max-width:520px;
 }
 
-.title {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
-  font-size: clamp(48px, 14vw, 86px);
-  line-height: .9;
-  color: #29242c;
+.script{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:42px;
+  color:#d47ca3;
+  margin:18px 0;
 }
 
-.subtitle {
-  margin-top: 20px;
-  font-size: 16px;
-  line-height: 1.8;
-  color: #625b65;
+/* BUTTON */
+
+.btn{
+  border:0;
+  background:rgba(255,255,255,.9);
+  color:#4d454b;
+  padding:15px 30px;
+  border-radius:50px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 12px 35px rgba(100,80,100,.13);
+  transition:.25s ease;
+  margin-top:18px;
 }
 
-.script {
-  font-family: "Parisienne", cursive;
-  font-size: 40px;
-  color: #d96d9c;
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 17px 40px rgba(100,80,100,.18);
 }
 
-.btn {
-  border: 0;
-  margin-top: 30px;
-  padding: 15px 32px;
-  border-radius: 999px;
-  background: #fff;
-  color: #4e4650;
-  font-size: 15px;
-  font-weight: 600;
+.btn:active{
+  transform:scale(.96);
+}
+
+/* ORB */
+
+.orb{
+  width:175px;
+  height:175px;
+  margin:0 auto 35px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#fff,#ffd8e8 35%,#e6c9f4 75%);
   box-shadow:
-    0 10px 30px rgba(70,50,70,.12),
-    inset 0 0 0 1px rgba(70,50,70,.08);
-  cursor: pointer;
-  transition: transform .3s ease, box-shadow .3s ease;
+    0 0 50px rgba(255,170,210,.35),
+    inset 0 0 30px rgba(255,255,255,.8);
+  animation:orbFloat 4s ease-in-out infinite;
 }
 
-.btn:hover {
-  transform: translateY(-3px);
+@keyframes orbFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* PAPER */
+
+.paper{
+  background:#fff;
+  width:min(650px,100%);
+  padding:45px 35px;
+  border-radius:5px;
+  text-align:left;
   box-shadow:
-    0 15px 35px rgba(70,50,70,.17),
-    inset 0 0 0 1px rgba(70,50,70,.1);
+    0 25px 70px rgba(70,50,70,.12),
+    0 2px 8px rgba(70,50,70,.06);
+  position:relative;
 }
 
-.btn:active {
-  transform: scale(.95);
+.paper:before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid #f1e4e9;
+  pointer-events:none;
 }
 
-/* ---------- WELCOME ---------- */
+.paper h2{
+  text-align:center;
+  font-size:48px;
+}
 
-.welcome-orb {
-  width: 145px;
-  height: 145px;
-  margin: 0 auto 30px;
-  border-radius: 50%;
+.letter{
+  position:relative;
+  z-index:1;
+  line-height:1.9;
+  color:#625a61;
+  font-family:"Cormorant Garamond",serif;
+  font-size:20px;
+}
+
+.signature{
+  margin-top:25px;
+  text-align:right;
+  color:#d47ca3;
+  font-size:24px;
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+}
+
+/* ENVELOPE */
+
+.envelope{
+  width:230px;
+  height:155px;
+  margin:30px auto;
+  position:relative;
+  cursor:pointer;
+  perspective:800px;
+}
+
+.env-body{
+  position:absolute;
+  inset:0;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 15px 40px rgba(80,50,70,.14);
+  border:1px solid #f2e4eb;
+}
+
+.env-flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  border-left:115px solid transparent;
+  border-right:115px solid transparent;
+  border-top:75px solid #f7d8e5;
+  transform-origin:top;
+  transition:.7s ease;
+  z-index:3;
+}
+
+.envelope.open .env-flap{
+  transform:rotateX(180deg);
+}
+
+.env-heart{
+  position:absolute;
+  left:50%;
+  top:58%;
+  transform:translate(-50%,-50%);
+  font-size:32px;
+  z-index:4;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:30px 0;
+}
+
+.card{
+  padding:25px 15px;
+  border-radius:20px;
+  background:rgba(255,255,255,.75);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 12px 35px rgba(80,60,90,.08);
+  transition:.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-7px);
+}
+
+.card-icon{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:24px;
+  margin-bottom:7px;
+}
+
+.card p{
+  font-size:13px;
+  color:#777078;
+  line-height:1.5;
+}
+
+/* MEMORY */
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin:25px 0;
+}
+
+.memory{
+  height:170px;
+  border-radius:22px;
   background:
-    radial-gradient(circle at 35% 30%, #fff, #ffd8e6 45%, #e7d9ff);
-  box-shadow: 0 20px 60px rgba(215,160,190,.3);
-  animation: orbBreath 4s ease-in-out infinite;
+    linear-gradient(135deg,#fff,#f9eaf1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  box-shadow:0 12px 35px rgba(80,60,90,.08);
+  border:1px dashed #e4cbd7;
 }
 
-@keyframes orbBreath {
-  0%,100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.07);
-  }
+.memory span{
+  font-size:35px;
 }
 
-/* ---------- ENVELOPE ---------- */
-
-.envelope-wrap {
-  perspective: 900px;
-  margin: 10px auto 30px;
-  width: 280px;
-  height: 190px;
+.memory p{
+  margin-top:8px;
+  color:#80757d;
+  font-size:13px;
 }
 
-.envelope {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(70,50,70,.15);
-  cursor: pointer;
+/* CAKE */
+
+.cake{
+  font-size:100px;
+  animation:cakeFloat 2s ease-in-out infinite;
+  margin:20px;
 }
 
-.envelope-front {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg,#fff,#fff7fb);
-  border-radius: 8px;
-  z-index: 3;
+@keyframes cakeFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
 
-.envelope-front:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  border-style: solid;
-  border-width: 95px 140px 0 140px;
-  border-color: #f4dbe6 transparent transparent transparent;
+.candles{
+  font-size:35px;
+  letter-spacing:10px;
 }
 
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 140px solid transparent;
-  border-right: 140px solid transparent;
-  border-top: 100px solid #efd1df;
-  transform-origin: top center;
-  z-index: 5;
-  transition: transform 900ms cubic-bezier(.2,.8,.2,1);
+/* GIFT */
+
+.gift{
+  width:180px;
+  height:140px;
+  margin:35px auto;
+  position:relative;
+  cursor:pointer;
+  transition:.4s ease;
 }
 
-.envelope.open .envelope-flap {
-  transform: rotateX(180deg);
+.gift:hover{
+  transform:translateY(-8px) rotate(-2deg);
 }
 
-.seal {
-  position: absolute;
-  z-index: 8;
-  left: 50%;
-  top: 53%;
-  transform: translate(-50%,-50%);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: #ff8fba;
-  color: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 5px 15px rgba(255,120,170,.3);
-  transition: opacity .4s;
+.gift-box{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:0;
+  height:105px;
+  background:#f7c5da;
+  border-radius:5px;
 }
 
-.envelope.open .seal {
-  opacity: 0;
+.gift-lid{
+  position:absolute;
+  left:0;
+  right:0;
+  top:20px;
+  height:35px;
+  background:#ef9fc0;
+  border-radius:5px;
+  z-index:2;
 }
 
-/* ---------- LETTER PAPER ---------- */
-
-.paper {
-  width: min(92vw, 560px);
-  min-height: 65vh;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 48px 32px;
-  background:
-    linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96));
-  color: #403840;
-  text-align: left;
-  box-shadow: 0 25px 70px rgba(70,50,70,.18);
-  position: relative;
-  transform: rotate(-.4deg);
-  animation: paperIn 1.2s cubic-bezier(.2,.8,.2,1);
+.gift-ribbon{
+  position:absolute;
+  width:25px;
+  height:105px;
+  background:#fff;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  bottom:0;
 }
 
-@keyframes paperIn {
-  from {
-    opacity: 0;
-    transform: translateY(60px) rotate(-2deg) scale(.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(-.4deg) scale(1);
+.gift.open .gift-lid{
+  animation:giftOpen .7s ease forwards;
+}
+
+@keyframes giftOpen{
+  to{
+    transform:translateY(-70px) rotate(-8deg);
+    opacity:.7;
   }
 }
 
-.paper:before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(200,150,175,.18);
-  pointer-events: none;
+.gift-message{
+  opacity:0;
+  transform:translateY(15px);
+  transition:.6s ease;
+  font-family:"Cormorant Garamond",serif;
+  font-size:28px;
+  color:#d47ca3;
 }
 
-.paper-title {
-  font-family: "Parisienne", cursive;
-  font-size: 42px;
-  color: #d56f9e;
-  margin-bottom: 22px;
-  text-align: center;
+.gift-message.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.letter-text {
-  white-space: pre-line;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 21px;
-  line-height: 1.65;
+/* FINAL */
+
+.final-heart{
+  font-size:85px;
+  animation:heartbeat 1.5s ease-in-out infinite;
 }
 
-.signature {
-  text-align: right;
-  font-family: "Parisienne", cursive;
-  font-size: 30px;
-  color: #d56f9e;
-  margin-top: 25px;
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.12)}
 }
 
-/* ---------- BESTIE ---------- */
-
-.reason-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 28px;
+.replay{
+  margin-top:25px;
 }
 
-.reason {
-  padding: 22px 14px;
-  background: rgba(255,255,255,.72);
-  border-radius: 22px;
-  box-shadow: 0 10px 30px rgba(80,60,80,.08);
-  animation: reasonIn .8s both;
-}
+/* RESPONSIVE */
 
-.reason:nth-child(2) { animation-delay: .15s; }
-.reason:nth-child(3) { animation-delay: .3s; }
-.reason:nth-child(4) { animation-delay: .45s; }
-
-@keyframes reasonIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reason-icon {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-/* ---------- MEMORIES ---------- */
-
-.memory-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-top: 28px;
-}
-
-.memory {
-  height: 190px;
-  border-radius: 24px;
-  background:
-    linear-gradient(145deg, rgba(255,215,228,.8), rgba(224,216,255,.8));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 35px rgba(80,60,80,.1);
-}
-
-.memory-placeholder {
-  font-size: 35px;
-  opacity: .7;
-}
-
-.memory span {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  padding: 8px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.75);
-  font-size: 12px;
-}
-
-/* ---------- MOMENTS ---------- */
-
-.moment-box {
-  margin-top: 30px;
-  padding: 32px 22px;
-  background: rgba(255,255,255,.72);
-  border-radius: 28px;
-  box-shadow: 0 15px 45px rgba(80,60,80,.1);
-}
-
-.moment {
-  display: none;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 27px;
-  line-height: 1.4;
-}
-
-.moment.active {
-  display: block;
-  animation: momentIn .7s ease;
-}
-
-@keyframes momentIn {
-  from {
-    opacity: 0;
-    transform: scale(.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.dots {
-  margin-top: 20px;
-  font-size: 12px;
-  letter-spacing: 5px;
-  color: #d77aa4;
-}
-
-/* ---------- CAKE ---------- */
-
-.cake {
-  position: relative;
-  width: 220px;
-  height: 190px;
-  margin: 10px auto 20px;
-}
-
-.cake-base {
-  position: absolute;
-  bottom: 15px;
-  left: 10px;
-  width: 200px;
-  height: 75px;
-  border-radius: 18px 18px 25px 25px;
-  background: linear-gradient(#ffc9dc,#ef9fbd);
-  box-shadow: 0 15px 30px rgba(180,100,140,.18);
-}
-
-.cake-middle {
-  position: absolute;
-  bottom: 72px;
-  left: 30px;
-  width: 160px;
-  height: 55px;
-  border-radius: 15px;
-  background: #fff;
-}
-
-.cake-top {
-  position: absolute;
-  bottom: 105px;
-  left: 48px;
-  width: 124px;
-  height: 35px;
-  border-radius: 50%;
-  background: #ffe3ec;
-}
-
-.candle {
-  position: absolute;
-  bottom: 136px;
-  left: 103px;
-  width: 14px;
-  height: 50px;
-  border-radius: 5px;
-  background: repeating-linear-gradient(
-    45deg,
-    #fff,
-    #fff 7px,
-    #e7cfff 7px,
-    #e7cfff 14px
-  );
-}
-
-.flame {
-  position: absolute;
-  bottom: 181px;
-  left: 100px;
-  width: 20px;
-  height: 28px;
-  border-radius: 50% 50% 50% 10%;
-  background: #ffb15c;
-  transform: rotate(-45deg);
-  box-shadow: 0 0 25px rgba(255,160,80,.6);
-  animation: flame 700ms ease-in-out infinite alternate;
-}
-
-@keyframes flame {
-  from { transform: rotate(-45deg) scale(1); }
-  to { transform: rotate(-42deg) scale(1.15); }
-}
-
-.flame.off {
-  display: none;
-}
-
-/* ---------- GIFT ---------- */
-
-.gift {
-  position: relative;
-  width: 170px;
-  height: 145px;
-  margin: 20px auto 25px;
-  cursor: pointer;
-  animation: giftBreath 2.5s ease-in-out infinite;
-}
-
-@keyframes giftBreath {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.gift-box {
-  position: absolute;
-  bottom: 0;
-  left: 15px;
-  width: 140px;
-  height: 100px;
-  background: linear-gradient(135deg,#ffc2dc,#e99dc1);
-  border-radius: 8px;
-  box-shadow: 0 20px 40px rgba(170,90,130,.2);
-}
-
-.gift-box:before {
-  content: "";
-  position: absolute;
-  left: 59px;
-  top: 0;
-  width: 22px;
-  height: 100%;
-  background: #fff0f7;
-}
-
-.gift-lid {
-  position: absolute;
-  top: 25px;
-  left: 5px;
-  width: 160px;
-  height: 30px;
-  border-radius: 7px;
-  background: #ffb3d2;
-  z-index: 3;
-  transition: transform 900ms cubic-bezier(.2,.8,.2,1);
-  transform-origin: left bottom;
-}
-
-.gift.open .gift-lid {
-  transform: rotate(-15deg) translateY(-60px) translateX(-15px);
-}
-
-.gift-ribbon {
-  position: absolute;
-  left: 74px;
-  top: 0;
-  width: 22px;
-  height: 130px;
-  background: #fff0f7;
-  z-index: 4;
-}
-
-.bow {
-  position: absolute;
-  top: -3px;
-  left: 55px;
-  font-size: 50px;
-  z-index: 5;
-  transition: transform .8s ease;
-}
-
-.gift.open .bow {
-  transform: translateY(-55px) rotate(20deg);
-}
-
-/* ---------- SPECIAL MESSAGE ---------- */
-
-.special-card {
-  padding: 45px 25px;
-  background: rgba(255,255,255,.72);
-  border-radius: 30px;
-  box-shadow: 0 20px 60px rgba(80,60,80,.1);
-}
-
-.reveal-text {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(28px, 7vw, 45px);
-  line-height: 1.3;
-  color: #37313a;
-  animation: revealText 1.5s ease;
-}
-
-@keyframes revealText {
-  from {
-    opacity: 0;
-    letter-spacing: 8px;
-    filter: blur(5px);
-  }
-  to {
-    opacity: 1;
-    letter-spacing: normal;
-    filter: blur(0);
-  }
-}
-
-/* ---------- FINAL ---------- */
-
-.final-title {
-  font-family: "Parisienne", cursive;
-  font-size: clamp(55px, 15vw, 90px);
-  color: #d85f97;
-  animation: finalGlow 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes finalGlow {
-  from {
-    text-shadow: 0 0 5px rgba(216,95,151,.15);
-  }
-  to {
-    text-shadow: 0 0 25px rgba(216,95,151,.35);
-  }
-}
-
-.replay {
-  margin-top: 35px;
-}
-
-/* ---------- CONFETTI ---------- */
-
-.confetti {
-  position: fixed;
-  top: -30px;
-  width: 9px;
-  height: 15px;
-  z-index: 100;
-  pointer-events: none;
-  animation: confettiFall 3.5s linear forwards;
-}
-
-@keyframes confettiFall {
-  to {
-    transform: translateY(115vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-@media(max-width: 430px) {
-  .reason-grid,
-  .memory-grid {
-    gap: 10px;
+@media(max-width:600px){
+  .cards{
+    grid-template-columns:1fr;
   }
 
-  .reason {
-    padding: 18px 10px;
+  .card{
+    padding:18px;
   }
 
-  .memory {
-    height: 160px;
+  .memory-grid{
+    grid-template-columns:1fr;
   }
 
-  .paper {
-    padding: 42px 25px;
+  .paper{
+    padding:35px 22px;
   }
 
-  .letter-text {
-    font-size: 19px;
+  .letter{
+    font-size:18px;
+  }
+
+  .orb{
+    width:145px;
+    height:145px;
   }
 }
 </style>
@@ -788,22 +542,23 @@ body {
   <div class="blob three"></div>
 </div>
 
-<!-- 🌸 WELCOME -->
+<!-- WELCOME -->
+
 <section class="screen active" id="screen1">
   <div class="content">
 
-    <div class="welcome-orb"></div>
+    <div class="orb"></div>
 
-    <div class="eyebrow">A little surprise</div>
+    <div class="eyebrow">A Little Surprise</div>
 
-    <h1 class="title">Hey Mahi...</h1>
+    <h1>Hey Mahi...</h1>
 
     <p class="subtitle">
       I made a tiny little world<br>
       just for your birthday. ✨
     </p>
 
-    <p class="script">Ready?</p>
+    <div class="script">Ready?</div>
 
     <button class="btn" onclick="goTo(2)">
       Start ✨
@@ -813,327 +568,463 @@ body {
 </section>
 
 
-<!-- 💌 LETTER INTRO -->
+<!-- LETTER -->
+
 <section class="screen" id="screen2">
   <div class="content">
 
-    <div class="eyebrow">A letter for you</div>
+    <div class="eyebrow">For You</div>
 
-    <h2 class="title" style="font-size:55px">
-      Something from the heart
-    </h2>
-
-    <p class="subtitle">
-      There's a little letter waiting inside.
-    </p>
-
-    <div class="envelope-wrap">
-      <div class="envelope" id="envelope">
-
-        <div class="envelope-front"></div>
-
-        <div class="envelope-flap"></div>
-
-        <div class="seal">♥</div>
-
-      </div>
+    <div class="envelope" id="envelope" onclick="openLetter()">
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+      <div class="env-heart">🤍</div>
     </div>
 
-    <button class="btn" onclick="openEnvelope()">
-      Open Letter 💌
+    <p class="subtitle">
+      Tap the envelope to open your birthday letter.
+    </p>
+
+    <button class="btn" onclick="goTo(3)">
+      Continue 💌
     </button>
 
   </div>
 </section>
 
 
-<!-- 🤍 LETTER -->
+<!-- LETTER PAPER -->
+
 <section class="screen" id="screen3">
+  <div class="content">
 
-  <div class="paper">
+    <div class="paper">
 
-    <div class="paper-title">
-      Dear Bestie,
+      <h2>Dear Bestie 🤍</h2>
+
+      <div class="letter">
+        Happy Birthday! 🎂<br><br>
+
+        I just wanted to make something a little different
+        for your special day — a tiny website filled with
+        little moments, memories and wishes.<br><br>
+
+        I hope this year brings you lots of happiness,
+        amazing memories, laughter and countless reasons
+        to smile. ✨<br><br>
+
+        Keep being the wonderful person you are,
+        and never forget how special you are to the people
+        around you.
+      </div>
+
+      <div class="signature">
+        — From your Bestie 🫶
+      </div>
+
     </div>
 
-    <div class="letter-text" id="letterText">
-Your birthday letter will go here.
-
-Tell me exactly what you want to write,
-and I'll replace this text with your
-real message.
-
-Nothing will be invented or added
-without you asking me.
-    </div>
-
-    <div class="signature">
-      — Your Bestie 💗
-    </div>
+    <button class="btn" onclick="goTo(4)">
+      Continue 🫶
+    </button>
 
   </div>
-
-  <button class="btn" onclick="goTo(4)">
-    Continue 🫶
-  </button>
-
 </section>
 
 
-<!-- 🫶 BESTIE -->
-<section class="screen" id="screen4">
+<!-- BESTIE -->
 
+<section class="screen" id="screen4">
   <div class="content">
 
-    <div class="eyebrow">Chapter 02</div>
+    <div class="eyebrow">Chapter One</div>
 
-    <h2 class="title" style="font-size:58px">
-      Bestie 🫶
-    </h2>
+    <h2>Bestie 🤍</h2>
 
     <p class="subtitle">
-      Some people simply make life a little brighter.
+      Some people make ordinary days feel a little more special.
     </p>
 
-    <div class="reason-grid">
+    <div class="cards">
 
-      <div class="reason">
-        <div class="reason-icon">💬</div>
-        <b>The conversations</b>
-        <p>Even random chats can become great memories.</p>
+      <div class="card">
+        <div class="card-icon">😂</div>
+        <h3>Always Fun</h3>
+        <p>
+          Somehow even the most normal moments become funny.
+        </p>
       </div>
 
-      <div class="reason">
-        <div class="reason-icon">😂</div>
-        <b>The laughter</b>
-        <p>Because somehow we always find something funny.</p>
+      <div class="card">
+        <div class="card-icon">🫶</div>
+        <h3>Always There</h3>
+        <p>
+          A friendship made from little moments that matter.
+        </p>
       </div>
 
-      <div class="reason">
-        <div class="reason-icon">🫶</div>
-        <b>The friendship</b>
-        <p>The little things are what make it special.</p>
-      </div>
-
-      <div class="reason">
-        <div class="reason-icon">✨</div>
-        <b>The memories</b>
-        <p>And there's still so much more to come.</p>
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <h3>Simply Special</h3>
+        <p>
+          Because being yourself is already pretty amazing.
+        </p>
       </div>
 
     </div>
 
     <button class="btn" onclick="goTo(5)">
-      Next 📸
+      Next ✨
     </button>
 
   </div>
-
 </section>
 
 
-<!-- 📸 MEMORIES -->
-<section class="screen" id="screen5">
+<!-- MEMORIES -->
 
+<section class="screen" id="screen5">
   <div class="content">
 
-    <div class="eyebrow">Chapter 03</div>
+    <div class="eyebrow">Chapter Two</div>
 
-    <h2 class="title" style="font-size:58px">
-      Memories 📸
-    </h2>
+    <h2>Memories 📸</h2>
 
     <p class="subtitle">
-      A few spaces for memories we'll add later. 🤍
+      These spaces are ready for your favourite photos later.
     </p>
 
     <div class="memory-grid">
 
       <div class="memory">
-        <div class="memory-placeholder">📷</div>
-        <span>Memory #1</span>
+        <span>📷</span>
+        <p>Memory #1</p>
       </div>
 
       <div class="memory">
-        <div class="memory-placeholder">📷</div>
-        <span>Memory #2</span>
+        <span>🌸</span>
+        <p>Memory #2</p>
       </div>
 
       <div class="memory">
-        <div class="memory-placeholder">📷</div>
-        <span>Memory #3</span>
+        <span>✨</span>
+        <p>Memory #3</p>
       </div>
 
       <div class="memory">
-        <div class="memory-placeholder">📷</div>
-        <span>Memory #4</span>
+        <span>🤍</span>
+        <p>Memory #4</p>
       </div>
 
     </div>
 
     <button class="btn" onclick="goTo(6)">
-      Next 😂
+      Continue 📸
     </button>
 
   </div>
-
 </section>
 
 
-<!-- 😂 MOMENTS -->
+<!-- BESTIE MOMENTS -->
+
 <section class="screen" id="screen6">
-
   <div class="content">
 
-    <div class="eyebrow">Chapter 04</div>
+    <div class="eyebrow">Chapter Three</div>
 
-    <h2 class="title" style="font-size:58px">
-      Bestie Moments 😂
-    </h2>
-
-    <div class="moment-box">
-
-      <div class="moment active">
-        “That one conversation that started normally
-        and somehow became completely random.” 😂
-      </div>
-
-      <div class="moment">
-        “The moments that make absolutely no sense
-        but somehow become unforgettable.” 😭
-      </div>
-
-      <div class="moment">
-        “Proof that being besties means
-        understanding the most random things.” 😂
-      </div>
-
-      <div class="dots">● ○ ○</div>
-
-    </div>
-
-    <button class="btn" onclick="nextMoment()">
-      Another one 😂
-    </button>
-
-    <button class="btn" onclick="goTo(7)">
-      Continue 🎂
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- 🎂 CAKE -->
-<section class="screen" id="screen7">
-
-  <div class="content">
-
-    <div class="eyebrow">Chapter 05</div>
-
-    <h2 class="title" style="font-size:58px">
-      Make a Wish 🎂
-    </h2>
-
-    <div class="cake">
-
-      <div class="flame" id="flame"></div>
-
-      <div class="candle"></div>
-
-      <div class="cake-top"></div>
-
-      <div class="cake-middle"></div>
-
-      <div class="cake-base"></div>
-
-    </div>
-
-    <p class="subtitle" id="cakeText">
-      Close your eyes... make a wish... ✨
-    </p>
-
-    <button class="btn" onclick="blowCake()">
-      Blow the Candle 🕯️
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- 🎁 GIFT -->
-<section class="screen" id="screen8">
-
-  <div class="content">
-
-    <div class="eyebrow">Chapter 06</div>
-
-    <h2 class="title" style="font-size:58px">
-      Mystery Gift 🎁
-    </h2>
+    <h2>Bestie Moments 😂</h2>
 
     <p class="subtitle">
-      Something is waiting inside...
+      The random jokes, silly conversations and moments
+      that somehow become unforgettable.
     </p>
 
-    <div class="gift" id="gift">
+    <div class="cards">
 
-      <div class="bow">🎀</div>
+      <div class="card">
+        <div class="card-icon">🤣</div>
+        <h3>That One Joke</h3>
+        <p>Insert your funniest inside joke here.</p>
+      </div>
 
-      <div class="gift-lid"></div>
+      <div class="card">
+        <div class="card-icon">🙃</div>
+        <h3>Random Moments</h3>
+        <p>The moments that made absolutely no sense.</p>
+      </div>
 
-      <div class="gift-box"></div>
-
-      <div class="gift-ribbon"></div>
+      <div class="card">
+        <div class="card-icon">💫</div>
+        <h3>Good Times</h3>
+        <p>Little memories worth remembering.</p>
+      </div>
 
     </div>
 
-    <button class="btn" onclick="openGift()">
-      Open Gift 🎁
+    <button class="btn" onclick="goTo(7)">
+      Next 🎂
     </button>
 
   </div>
-
 </section>
 
 
-<!-- ✨ SPECIAL MESSAGE -->
-<section class="screen" id="screen9">
+<!-- CAKE -->
 
+<section class="screen" id="screen7">
   <div class="content">
 
-    <div class="special-card">
+    <div class="eyebrow">Chapter Four</div>
 
-      <div class="eyebrow">One more thing</div>
+    <h2>Make a Wish 🎂</h2>
 
-      <div class="reveal-text">
-        You deserve a birthday<br>
-        filled with beautiful moments,<br>
-        genuine smiles,<br>
-        and people who care about you. ✨
-      </div>
+    <div class="candles">🕯️ 🕯️ 🕯️</div>
 
-      <p class="subtitle">
-        And I hope this little website<br>
-        becomes one tiny memory you'll remember. 🤍
-      </p>
+    <div class="cake">🎂</div>
 
+    <p class="subtitle">
+      Close your eyes, make a wish<br>
+      and blow out the candles. ✨
+    </p>
+
+    <button class="btn" onclick="celebrateCake()">
+      Blow Candles ✨
+    </button>
+
+  </div>
+</section>
+
+
+<!-- GIFT -->
+
+<section class="screen" id="screen8">
+  <div class="content">
+
+    <div class="eyebrow">Chapter Five</div>
+
+    <h2>Mystery Gift 🎁</h2>
+
+    <p class="subtitle">
+      There's one little surprise waiting for you.
+    </p>
+
+    <div class="gift" id="gift" onclick="openGift()">
+      <div class="gift-box"></div>
+      <div class="gift-lid"></div>
+      <div class="gift-ribbon"></div>
     </div>
+
+    <div class="gift-message" id="giftMessage">
+      Surprise! 🎉<br>
+      You deserve something wonderful.
+    </div>
+
+    <button class="btn" onclick="goTo(9)">
+      Continue ✨
+    </button>
+
+  </div>
+</section>
+
+
+<!-- SPECIAL MESSAGE -->
+
+<section class="screen" id="screen9">
+  <div class="content">
+
+    <div class="eyebrow">One More Thing</div>
+
+    <h2>For My Bestie ✨</h2>
+
+    <p class="subtitle">
+      You deserve a birthday filled with beautiful moments,
+      genuine smiles and people who care about you. ✨
+      <br><br>
+      And I hope this little website becomes one tiny
+      memory you'll remember. 🤍
+    </p>
 
     <button class="btn" onclick="goTo(10)">
       Continue ❤️
     </button>
 
   </div>
-
 </section>
 
 
-<!-- ❤️ FINAL -->
-<section class="screen" id="screen10">
+<!-- FINAL -->
 
-  <div c
-    </body>
-  </html>
+<section class="screen" id="screen10">
+  <div class="content">
+
+    <div class="final-heart">💗</div>
+
+    <div class="eyebrow">The End</div>
+
+    <h2>Happy Birthday Bestie! 🎂</h2>
+
+    <p class="subtitle">
+      May your year be full of happiness,
+      laughter, beautiful memories and
+      countless little reasons to smile. ✨
+    </p>
+
+    <div class="script">
+      Stay awesome 🤍
+    </div>
+
+    <button class="btn replay" onclick="restart()">
+      Replay ↻
+    </button>
+
+  </div>
+</section>
+
+
+<script>
+
+let currentScreen = 1;
+
+/* PAGE NAVIGATION */
+
+function goTo(number){
+
+  const current = document.getElementById("screen" + currentScreen);
+  const next = document.getElementById("screen" + number);
+
+  if(!next) return;
+
+  current.classList.remove("active");
+
+  setTimeout(function(){
+    next.classList.add("active");
+  },100);
+
+  currentScreen = number;
+
+  burstHearts(5);
+}
+
+
+/* ENVELOPE */
+
+function openLetter(){
+
+  document.getElementById("envelope").classList.add("open");
+
+  setTimeout(function(){
+    burstHearts(8);
+  },500);
+
+}
+
+
+/* CAKE */
+
+function celebrateCake(){
+
+  burstHearts(25);
+
+  setTimeout(function(){
+    goTo(8);
+  },1400);
+
+}
+
+
+/* GIFT */
+
+function openGift(){
+
+  const gift = document.getElementById("gift");
+  const message = document.getElementById("giftMessage");
+
+  gift.classList.add("open");
+
+  setTimeout(function(){
+    message.classList.add("show");
+    burstHearts(18);
+  },500);
+
+}
+
+
+/* FLOATING HEARTS */
+
+function createHeart(){
+
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+  heart.textContent = Math.random() > .5 ? "♥" : "♡";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (12 + Math.random() * 18) + "px";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  heart.style.setProperty(
+    "--drift",
+    (Math.random() * 160 - 80) + "px"
+  );
+
+  document.body.appendChild(heart);
+
+  setTimeout(function(){
+    heart.remove();
+  },10000);
+
+}
+
+
+/* CREATE OCCASIONAL HEARTS */
+
+setInterval(function(){
+
+  if(Math.random() > .25){
+    createHeart();
+  }
+
+},900);
+
+
+/* HEART BURST */
+
+function burstHearts(amount){
+
+  for(let i=0;i<amount;i++){
+
+    setTimeout(function(){
+      createHeart();
+    },i*70);
+
+  }
+
+}
+
+
+/* RESTART */
+
+function restart(){
+
+  document.getElementById("envelope").classList.remove("open");
+
+  document.getElementById("gift").classList.remove("open");
+
+  document.getElementById("giftMessage").classList.remove("show");
+
+  document.querySelectorAll(".screen").forEach(function(screen){
+    screen.classList.remove("active");
+  });
+
+  document.getElementById("screen1").classList.add("active");
+
+  currentScreen = 1;
+
+  burstHearts(12);
+
+}
+
+</script>
+
+</body>
+        </html>
