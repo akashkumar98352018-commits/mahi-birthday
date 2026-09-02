@@ -56,7 +56,7 @@ body:after{
   inset:0;
   pointer-events:none;
   overflow:hidden;
-  z-index:10;
+  z-index:20;
 }
 
 .float{
@@ -158,63 +158,101 @@ p{
   font:14px Arial;
 }
 
-/* ENVELOPE */
+/* =========================
+   ENVELOPE
+========================= */
 
-.env{
-  width:min(420px,90vw);
-  height:260px;
+.envelopeArea{
+  width:min(390px,90vw);
+  height:310px;
   margin:28px auto;
   position:relative;
+}
+
+.envelope{
+  position:absolute;
+  width:100%;
+  height:220px;
+  left:0;
+  bottom:20px;
   cursor:pointer;
 }
 
-.envbody{
+.envelopeBack{
+  position:absolute;
+  inset:0;
+  background:#f3b2ca;
+  border-radius:0 0 22px 22px;
+  box-shadow:0 20px 50px #76576618;
+  z-index:1;
+}
+
+.letterInside{
+  position:absolute;
+  left:8%;
+  width:84%;
+  height:175px;
+  bottom:30px;
+  background:#fffefb;
+  border-radius:12px;
+  padding:28px 18px;
+  box-shadow:0 10px 30px #76576618;
+  z-index:2;
+  transition:
+    transform .9s cubic-bezier(.2,.8,.2,1),
+    opacity .5s ease;
+}
+
+.letterInside b{
+  font-size:20px;
+}
+
+.envelopeFront{
   position:absolute;
   left:0;
   right:0;
   bottom:0;
-  height:215px;
-  background:#f0adc6;
+  height:125px;
+  background:#e99fbd;
+  clip-path:polygon(
+    0 0,
+    50% 55%,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
   border-radius:0 0 22px 22px;
+  z-index:4;
 }
 
-.flap{
+.envelopeFlap{
   position:absolute;
-  top:45px;
   left:0;
-  width:0;
-  height:0;
-  border-left:210px solid transparent;
-  border-right:210px solid transparent;
-  border-top:135px solid #e79bb9;
-  transform-origin:top;
-  transition:.8s;
-  z-index:3;
+  right:0;
+  top:0;
+  height:135px;
+  background:#f0a8c4;
+  clip-path:polygon(
+    0 0,
+    50% 100%,
+    100% 0
+  );
+  transform-origin:top center;
+  transition:.8s ease;
+  z-index:5;
 }
 
-.env.open .flap{
+.envelope.open .envelopeFlap{
   transform:rotateX(180deg);
 }
 
-.mini{
-  position:absolute;
-  z-index:2;
-  left:35px;
-  right:35px;
-  top:75px;
-  height:150px;
-  background:#fff;
-  border-radius:12px;
-  padding:25px;
-  transition:.8s;
-  box-shadow:0 8px 30px #76576622;
+.envelope.open .letterInside{
+  transform:translateY(-105px);
 }
 
-.env.open .mini{
-  transform:translateY(-90px);
-}
-
-/* LETTER */
+/* =========================
+   LETTER
+========================= */
 
 .letter{
   max-width:680px;
@@ -238,7 +276,9 @@ p{
   margin-top:30px;
 }
 
-/* BESTIE */
+/* =========================
+   BESTIE
+========================= */
 
 .besties{
   display:grid;
@@ -268,91 +308,101 @@ p{
   margin-bottom:8px;
 }
 
-/* CAKE */
+/* =========================
+   CAKE
+========================= */
 
-.cakebox{
-  margin:35px auto;
-  padding:30px 20px;
+.cakeStage{
   width:min(430px,90vw);
+  margin:35px auto;
+  padding:35px 20px;
   border-radius:30px;
-  background:linear-gradient(
-    145deg,
-    #fff,
-    #fff5f9
-  );
+  background:#fffafd;
   border:1px solid #f2dce6;
   box-shadow:0 25px 70px #76576618;
 }
 
-.cakeemoji{
-  font-size:clamp(120px,30vw,190px);
-  line-height:1;
-  display:inline-block;
-  filter:drop-shadow(0 15px 20px #76576620);
-  transition:.5s ease;
+.cakeWrap{
+  position:relative;
+  width:220px;
+  height:190px;
+  margin:auto;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 }
 
-.cakeemoji.blow{
+.cakeEmoji{
+  font-size:150px;
+  line-height:1;
+  display:block;
+  transition:.5s ease;
+  filter:drop-shadow(0 15px 18px #76576618);
+}
+
+.cakeEmoji.wish{
   transform:scale(1.08);
 }
 
-/* GIFT */
-
-.gift{
-  width:250px;
-  height:190px;
-  margin:35px auto;
-  position:relative;
-  cursor:pointer;
-}
-
-.box{
+.flames{
   position:absolute;
-  left:25px;
-  right:25px;
-  bottom:0;
-  height:130px;
-  background:#edabc4;
-  border-radius:12px;
-}
-
-.lid{
-  position:absolute;
-  left:10px;
-  right:10px;
-  top:35px;
-  height:43px;
-  background:#f4bfd3;
-  border-radius:10px;
-  z-index:2;
-  transition:.7s;
-}
-
-.rv{
-  position:absolute;
-  left:calc(50% - 12px);
-  top:0;
-  width:24px;
-  height:190px;
-  background:#fff0aa;
-  z-index:3;
-}
-
-.rh{
-  position:absolute;
+  top:2px;
   left:0;
   right:0;
-  top:45px;
-  height:22px;
-  background:#fff0aa;
-  z-index:4;
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  font-size:30px;
+  transition:.45s ease;
 }
 
-.gift.open .lid{
-  transform:translateY(-82px) rotate(-5deg);
+.flames.off{
+  opacity:0;
+  transform:translateY(-20px) scale(.4);
 }
 
-/* CARD */
+.sparkleCake{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+/* =========================
+   GIFT
+========================= */
+
+.giftArea{
+  margin:35px auto;
+  width:260px;
+  height:230px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.giftEmoji{
+  font-size:155px;
+  line-height:1;
+  cursor:pointer;
+  display:block;
+  filter:drop-shadow(0 18px 20px #76576620);
+  transition:
+    transform .8s cubic-bezier(.2,.8,.2,1),
+    filter .4s ease;
+}
+
+.giftEmoji:hover{
+  transform:translateY(-7px) scale(1.04);
+}
+
+.giftEmoji.open{
+  transform:translateY(-12px) scale(1.15) rotate(-3deg);
+  filter:drop-shadow(0 22px 28px #76576628);
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card{
   background:#ffffffdf;
@@ -362,7 +412,9 @@ p{
   box-shadow:0 25px 70px #76576618;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -374,10 +426,17 @@ p{
     padding:32px 23px;
   }
 
-  .cakeemoji{
-    font-size:140px;
+  .envelopeArea{
+    height:300px;
   }
 
+  .cakeEmoji{
+    font-size:135px;
+  }
+
+  .giftEmoji{
+    font-size:140px;
+  }
 }
 </style>
 </head>
@@ -387,7 +446,9 @@ p{
 <div id="fx"></div>
 
 
-<!-- PAGE 1 -->
+<!-- =========================
+     PAGE 1
+========================= -->
 
 <section class="page on" id="p1">
 
@@ -421,7 +482,9 @@ Begin the Surprise ✨
 </section>
 
 
-<!-- PAGE 2 -->
+<!-- =========================
+     PAGE 2
+========================= -->
 
 <section class="page" id="p2">
 
@@ -439,11 +502,17 @@ First, something waiting for you
 Tap the envelope to open it.
 </p>
 
-<div class="env" id="env" onclick="openEnv()">
 
-<div class="envbody"></div>
+<div class="envelopeArea">
 
-<div class="mini">
+<div
+class="envelope"
+id="env"
+onclick="openEnv()">
+
+<div class="envelopeBack"></div>
+
+<div class="letterInside">
 
 <b>
 For Mahi 🤍
@@ -455,9 +524,14 @@ There is something I want you to read…
 
 </div>
 
-<div class="flap"></div>
+<div class="envelopeFront"></div>
+
+<div class="envelopeFlap"></div>
 
 </div>
+
+</div>
+
 
 <button
 class="btn"
@@ -474,7 +548,9 @@ Read the Letter →
 </section>
 
 
-<!-- PAGE 3 -->
+<!-- =========================
+     PAGE 3
+========================= -->
 
 <section class="page" id="p3">
 
@@ -526,7 +602,9 @@ Continue →
 </section>
 
 
-<!-- PAGE 4 -->
+<!-- =========================
+     PAGE 4
+========================= -->
 
 <section class="page" id="p4">
 
@@ -607,7 +685,9 @@ Next →
 </section>
 
 
-<!-- PAGE 5 -->
+<!-- =========================
+     PAGE 5
+========================= -->
 
 <section class="page" id="p5">
 
@@ -622,14 +702,29 @@ Make a wish
 </h2>
 
 <p id="ct">
-Two candles waiting for a birthday wish… 🕯️🕯️
+Make a wish and blow out the candles… 🕯️
 </p>
 
 
-<div class="cakebox">
+<div class="cakeStage">
 
-<div class="cakeemoji" id="cake">
+<div class="cakeWrap">
+
+<div
+class="flames"
+id="flames">
+
+<span>🔥</span>
+<span>🔥</span>
+
+</div>
+
+<div
+class="cakeEmoji"
+id="cake">
 🎂
+</div>
+
 </div>
 
 </div>
@@ -661,7 +756,9 @@ Continue →
 </section>
 
 
-<!-- PAGE 6 -->
+<!-- =========================
+     PAGE 6
+========================= -->
 
 <section class="page" id="p6">
 
@@ -680,18 +777,16 @@ Tap the gift and see what is inside.
 </p>
 
 
+<div class="giftArea">
+
 <div
-class="gift"
+class="giftEmoji"
 id="gift"
 onclick="giftOpen()">
 
-<div class="box"></div>
+🎁
 
-<div class="lid"></div>
-
-<div class="rv"></div>
-
-<div class="rh"></div>
+</div>
 
 </div>
 
@@ -724,7 +819,9 @@ One Last Thing →
 </section>
 
 
-<!-- PAGE 7 -->
+<!-- =========================
+     PAGE 7
+========================= -->
 
 <section class="page" id="p7">
 
@@ -766,7 +863,9 @@ Final Celebration →
 </section>
 
 
-<!-- PAGE 8 -->
+<!-- =========================
+     PAGE 8
+========================= -->
 
 <section class="page" id="p8">
 
@@ -802,7 +901,9 @@ Replay ↻
 let cur = 1;
 
 
-/* PAGE NAVIGATION */
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
 function go(n){
 
@@ -827,14 +928,16 @@ function go(n){
 }
 
 
-/* ENVELOPE */
+/* =========================
+   ENVELOPE
+========================= */
 
 function openEnv(){
 
-  document
-  .getElementById('env')
-  .classList
-  .add('open');
+  const env =
+    document.getElementById('env');
+
+  env.classList.add('open');
 
   setTimeout(function(){
 
@@ -843,18 +946,21 @@ function openEnv(){
     .style
     .display = 'inline-block';
 
-  },800);
+  },900);
 
 }
 
 
-/* FLOATING EFFECT */
+/* =========================
+   FLOATING EFFECT
+========================= */
 
 function burst(){
 
   for(let i=0;i<24;i++){
 
-    let x = document.createElement('div');
+    let x =
+      document.createElement('div');
 
     x.className = 'float';
 
@@ -884,22 +990,29 @@ function burst(){
 }
 
 
-/* BIRTHDAY CAKE */
+/* =========================
+   CAKE
+========================= */
 
 function blow(){
 
-  let cake =
+  const flames =
+    document.getElementById('flames');
+
+  const cake =
     document.getElementById('cake');
 
-  cake.classList.add('blow');
+  const button =
+    document.getElementById('cb');
+
+  flames.classList.add('off');
+
+  cake.classList.add('wish');
 
   document
   .getElementById('ct')
   .textContent =
-  'Wish made! ✨ Enjoy your birthday cake! 🎂';
-
-  let button =
-    document.getElementById('cb');
+  'Wish made! ✨ Happy Birthday! 🎂';
 
   button.style.display = 'none';
 
@@ -913,14 +1026,16 @@ function blow(){
 }
 
 
-/* GIFT */
+/* =========================
+   GIFT
+========================= */
 
 function giftOpen(){
 
-  document
-  .getElementById('gift')
-  .classList
-  .add('open');
+  const gift =
+    document.getElementById('gift');
+
+  gift.classList.add('open');
 
   document
   .getElementById('gm')
@@ -932,11 +1047,14 @@ function giftOpen(){
 }
 
 
-/* CONTINUOUS FLOATING */
+/* =========================
+   CONTINUOUS FLOATING
+========================= */
 
 setInterval(function(){
 
-  let x = document.createElement('div');
+  let x =
+    document.createElement('div');
 
   x.className = 'float';
 
@@ -963,7 +1081,9 @@ setInterval(function(){
 },1000);
 
 
-/* REPLAY */
+/* =========================
+   REPLAY
+========================= */
 
 function replay(){
 
