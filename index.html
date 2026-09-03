@@ -4,16 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Happy Birthday Mahi 🤍</title>
+
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;font-family:Georgia,serif;background:#fff;
-color:#4d4050;overflow:hidden
+margin:0;font-family:Georgia,serif;background:#fff;color:#4d4050;
+overflow:hidden
 }
 .blob{position:fixed;border-radius:50%;filter:blur(45px);opacity:.28;z-index:-1}
 .b1{width:220px;height:220px;background:#ffd6e7;top:-70px;left:-70px}
 .b2{width:240px;height:240px;background:#dce8ff;right:-80px;bottom:-80px}
 .b3{width:180px;height:180px;background:#fff0bd;left:40%;top:40%}
+
 .page{
 display:none;min-height:100vh;padding:28px 20px;
 align-items:center;justify-content:center;text-align:center;
@@ -27,28 +29,41 @@ p{font-size:18px;line-height:1.7}
 button{
 border:0;border-radius:30px;padding:13px 24px;
 background:#f4bfd5;color:#593f4e;font-size:16px;
-cursor:pointer;box-shadow:0 8px 22px #0001;margin-top:15px
+cursor:pointer;box-shadow:0 8px 22px #0001;margin:8px 3px
 }
 button:active{transform:scale(.96)}
 .small{font-size:14px;opacity:.7}
-.heart{position:fixed;bottom:-30px;font-size:20px;
-animation:float 7s linear infinite;pointer-events:none}
-@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
-@keyframes fade{from{opacity:0;transform:translateY(18px)}
-to{opacity:1;transform:none}}
 
-/* envelope */
-.envelopeWrap{perspective:900px;margin:25px auto;width:300px;height:210px}
-.envelope{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.heart{
+position:fixed;bottom:-30px;font-size:20px;
+animation:float 7s linear infinite;pointer-events:none
+}
+@keyframes float{
+to{transform:translateY(-110vh) rotate(25deg);opacity:0}
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(18px)}
+to{opacity:1;transform:none}
+}
+
+/* ENVELOPE */
+.envelopeWrap{
+perspective:900px;margin:25px auto;width:300px;height:210px
+}
+.envelope{
+position:relative;width:100%;height:100%;transform-style:preserve-3d
+}
 .envBack,.pocket{
 position:absolute;inset:0;background:#f7d4e2;border-radius:10px
 }
-.pocket{clip-path:polygon(0 45%,50% 75%,100% 45%,100% 100%,0 100%);
-background:#edb9cf;z-index:4}
+.pocket{
+clip-path:polygon(0 45%,50% 75%,100% 45%,100% 100%,0 100%);
+background:#edb9cf;z-index:4
+}
 .letter{
 position:absolute;width:86%;height:175px;left:7%;top:15px;
-background:#fff;border-radius:6px;padding:20px;
-z-index:2;transition:.9s;box-shadow:0 5px 18px #0002
+background:#fff;border-radius:6px;padding:20px;z-index:2;
+transition:.9s;box-shadow:0 5px 18px #0002
 }
 .letter h3{margin:0 0 8px}
 .flap{
@@ -57,38 +72,229 @@ background:#f2c5d8;clip-path:polygon(0 0,100% 0,50% 100%);
 transform-origin:top;z-index:5;transition:.9s
 }
 .seal{
-position:absolute;z-index:6;left:50%;top:45%;transform:translate(-50%,-50%);
-font-size:28px
+position:absolute;z-index:6;left:50%;top:45%;
+transform:translate(-50%,-50%);font-size:28px
 }
-.envelope.open .flap{transform:rotateX(180deg);z-index:1}
-.envelope.open .letter{transform:translateY(-115px);z-index:7}
+.envelope.open .flap{
+transform:rotateX(180deg);z-index:1
+}
+.envelope.open .letter{
+transform:translateY(-115px);z-index:7
+}
 .envelope.open .seal{opacity:0}
 
-/* bestie cards */
+/* CARDS */
 .cards{display:grid;gap:14px;margin:20px 0}
 .card{
 padding:22px;background:#ffffffaa;border:1px solid #f1dbe5;
 border-radius:20px;box-shadow:0 8px 25px #0000000c
 }
 
-/* cake */
-.cake{font-size:105px;position:relative;display:inline-block}
-.flames{position:absolute;top:-8px;left:25px;right:25px;
-display:flex;justify-content:space-around;font-size:25px;
-transition:.5s}
-.flames.off{opacity:0;transform:translateY(-15px)}
-.blow{font-size:28px;opacity:0}
-.blow.show{animation:puff 1s ease}
-@keyframes puff{0%{opacity:0;transform:scale(.5)}
-40%{opacity:1}100%{opacity:0;transform:scale(1.8) translateX(25px)}}
+/* =========================
+   REAL CSS BIRTHDAY CAKE
+========================= */
+.cakeArea{
+height:280px;display:flex;align-items:center;
+justify-content:center;position:relative
+}
+.cake{
+position:relative;width:190px;height:150px;
+margin-top:55px
+}
+.cakeTop{
+position:absolute;top:18px;left:10px;
+width:170px;height:42px;border-radius:50%;
+background:#ffe9d2;border:4px solid #eab987;
+z-index:4
+}
+.cakeBody{
+position:absolute;top:38px;left:15px;
+width:160px;height:85px;
+background:linear-gradient(#f6c878,#edaa55);
+border-radius:8px 8px 28px 28px;
+z-index:2
+}
+.frosting{
+position:absolute;top:32px;left:12px;
+width:166px;height:35px;
+background:#fff5ea;border-radius:50%;
+z-index:5
+}
+.drip{
+position:absolute;top:47px;width:24px;height:28px;
+background:#fff5ea;border-radius:0 0 15px 15px;
+z-index:6
+}
+.d1{left:35px}.d2{left:75px;height:36px}.d3{left:120px;height:25px}
 
-/* gift */
-.gift{font-size:120px;display:inline-block;transition:.8s}
-.gift.open{transform:scale(1.15) rotate(-4deg)}
-.spark{font-size:25px;opacity:0}
-.spark.show{animation:pop 1s ease}
-@keyframes pop{0%{opacity:0;transform:scale(.4)}
-40%{opacity:1}100%{opacity:0;transform:scale(1.8)}}
+.cakeBottom{
+position:absolute;bottom:0;left:5px;
+width:180px;height:28px;border-radius:50%;
+background:#e8a14e;z-index:1
+}
+
+/* candles */
+.candle{
+position:absolute;top:-43px;width:13px;height:48px;
+border-radius:5px;background:repeating-linear-gradient(
+-45deg,#f28bb5 0 6px,#fff 6px 11px
+);z-index:7
+}
+.c1{left:52px}.c2{left:88px}.c3{left:124px}
+
+.flame{
+position:absolute;top:-25px;left:50%;
+transform:translateX(-50%);
+width:15px;height:23px;
+background:linear-gradient(#ffd34e,#ff8b38);
+border-radius:50% 50% 50% 50%;
+filter:drop-shadow(0 0 7px #ffd35c);
+animation:flicker .35s infinite alternate;
+transform-origin:bottom
+}
+@keyframes flicker{
+from{transform:translateX(-50%) scale(1) rotate(-3deg)}
+to{transform:translateX(-50%) scale(.82) rotate(4deg)}
+}
+
+.cakeArea.blowing .flame{
+animation:flameBlow .65s ease forwards
+}
+@keyframes flameBlow{
+0%{transform:translateX(-50%) rotate(0) scale(1)}
+30%{transform:translateX(-65%) rotate(-35deg) scale(.9)}
+60%{transform:translateX(-90%) rotate(-55deg) scale(.7);opacity:.6}
+100%{transform:translateX(-120%) rotate(-65deg) scale(.15);opacity:0}
+}
+
+.wind{
+position:absolute;right:calc(50% - 20px);top:95px;
+font-size:38px;opacity:0;pointer-events:none
+}
+.blowing .wind{animation:wind .9s ease}
+@keyframes wind{
+0%{opacity:0;transform:translateX(0)}
+25%{opacity:.8}
+100%{opacity:0;transform:translateX(-115px)}
+}
+
+.puff{
+position:absolute;top:90px;left:50%;
+font-size:28px;opacity:0;pointer-events:none
+}
+.blowing .puff{animation:puff .9s ease}
+@keyframes puff{
+0%{opacity:0;transform:translate(-10px,10px) scale(.4)}
+40%{opacity:.8}
+100%{opacity:0;transform:translate(-90px,0) scale(1.4)}
+}
+
+/* =========================
+   REAL CSS GIFT BOX
+========================= */
+.giftArea{
+height:300px;display:flex;align-items:center;
+justify-content:center;position:relative
+}
+.giftBox{
+position:relative;width:190px;height:145px;
+margin-top:35px
+}
+.giftBase{
+position:absolute;bottom:10px;left:10px;
+width:170px;height:110px;
+background:linear-gradient(135deg,#ffd36b,#f2a93b);
+border-radius:5px;
+box-shadow:0 15px 30px #0002;
+z-index:2
+}
+.giftBase:after{
+content:"";position:absolute;left:72px;top:0;
+width:28px;height:110px;background:#ef6c88
+}
+.giftLid{
+position:absolute;top:18px;left:0;
+width:190px;height:38px;
+background:linear-gradient(135deg,#ffe080,#f5b544);
+border-radius:7px;
+z-index:5;
+transform-origin:10px 100%;
+transition:1s cubic-bezier(.2,.8,.2,1)
+}
+.giftLid:after{
+content:"";position:absolute;left:81px;top:0;
+width:28px;height:38px;background:#ef6c88
+}
+.ribbonV{
+position:absolute;top:18px;left:81px;
+width:28px;height:137px;
+background:#ef6c88;z-index:6;
+pointer-events:none
+}
+.bow{
+position:absolute;top:-25px;left:50%;
+transform:translateX(-50%);
+width:75px;height:45px;z-index:7;
+transition:.7s
+}
+.bow:before,.bow:after{
+content:"";position:absolute;
+width:42px;height:32px;background:#ef6c88;
+top:4px;border-radius:50% 50% 45% 45%
+}
+.bow:before{left:0;transform:rotate(-25deg)}
+.bow:after{right:0;transform:rotate(25deg)}
+.bow i{
+position:absolute;width:20px;height:20px;
+background:#d94f70;border-radius:50%;
+left:27px;top:10px;z-index:2
+}
+
+/* opening */
+.giftBox.open .giftLid{
+transform:translateY(-70px) rotate(-14deg)
+}
+.giftBox.open .bow{
+transform:translate(-50%,-75px) rotate(-12deg);
+opacity:.9
+}
+.giftBox.open .ribbonV{
+opacity:0
+}
+
+.giftGlow{
+position:absolute;width:180px;height:80px;
+background:#fff4b8;filter:blur(30px);
+border-radius:50%;opacity:0
+}
+.giftBox.open + .giftGlow{
+animation:glow .9s ease forwards
+}
+@keyframes glow{
+0%{opacity:0;transform:scale(.5)}
+50%{opacity:.8}
+100%{opacity:0;transform:scale(1.5)}
+}
+
+.giftSpark{
+position:absolute;font-size:28px;opacity:0
+}
+.giftBox.open ~ .giftSpark{
+animation:spark 1.2s ease forwards
+}
+@keyframes spark{
+0%{opacity:0;transform:scale(.4)}
+35%{opacity:1}
+100%{opacity:0;transform:scale(1.8) translateY(-35px)}
+}
+
+#giftText{
+opacity:0;transform:translateY(30px);
+transition:.8s ease;margin-top:-5px
+}
+#giftText.show{
+opacity:1;transform:none
+}
 
 .message{
 background:#fff;padding:30px 24px;border-radius:24px;
@@ -99,6 +305,7 @@ box-shadow:0 15px 45px #00000012
 </head>
 
 <body>
+
 <div class="blob b1"></div>
 <div class="blob b2"></div>
 <div class="blob b3"></div>
@@ -118,6 +325,7 @@ box-shadow:0 15px 45px #00000012
 <section class="page" id="p2">
 <div class="box">
 <h2>A Little Envelope 💌</h2>
+
 <div class="envelopeWrap">
 <div class="envelope" id="env">
 <div class="envBack"></div>
@@ -130,6 +338,7 @@ box-shadow:0 15px 45px #00000012
 <div class="seal">💗</div>
 </div>
 </div>
+
 <button onclick="openEnvelope()">Open Envelope</button>
 <button onclick="go(3)">Continue →</button>
 </div>
@@ -158,134 +367,248 @@ big dreams and countless reasons to smile.
 <section class="page" id="p4">
 <div class="box">
 <h2>My Bestie ✨</h2>
+
 <div class="cards">
-<div class="card"><h3>😂 The Chaos</h3><p>Life is definitely more fun with your random energy.</p></div>
-<div class="card"><h3>🫂 My Comfort Person</h3><p>Some people just make ordinary days feel a little better.</p></div>
-<div class="card"><h3>✨ One of a Kind</h3><p>Never stop being the wonderfully unique person you are.</p></div>
+<div class="card">
+<h3>😂 The Chaos</h3>
+<p>Life is definitely more fun with your random energy.</p>
 </div>
+
+<div class="card">
+<h3>🫂 My Comfort Person</h3>
+<p>Some people just make ordinary days feel a little better.</p>
+</div>
+
+<div class="card">
+<h3>✨ One of a Kind</h3>
+<p>Never stop being the wonderfully unique person you are.</p>
+</div>
+</div>
+
 <button onclick="go(5)">Keep Going →</button>
 </div>
 </section>
 
-<!-- 5 -->
+<!-- 5 CAKE -->
 <section class="page" id="p5">
 <div class="box">
+
 <h2>Birthday Time! 🎉</h2>
+
+<div class="cakeArea" id="cakeArea">
+
 <div class="cake">
-🎂
-<div class="flames" id="flames">
-<span>🔥</span><span>🔥</span><span>🔥</span>
+
+<div class="candle c1">
+<div class="flame"></div>
 </div>
+
+<div class="candle c2">
+<div class="flame"></div>
 </div>
-<div class="blow" id="puff">💨</div>
+
+<div class="candle c3">
+<div class="flame"></div>
+</div>
+
+<div class="cakeTop"></div>
+<div class="frosting"></div>
+
+<div class="drip d1"></div>
+<div class="drip d2"></div>
+<div class="drip d3"></div>
+
+<div class="cakeBody"></div>
+<div class="cakeBottom"></div>
+
+</div>
+
+<div class="wind">💨</div>
+<div class="puff">☁️</div>
+
+</div>
+
 <p>Make a wish… then blow the candles! ✨</p>
+
 <button onclick="blowCandles()">Blow Candles 💨</button>
 <button onclick="go(6)">Next →</button>
+
 </div>
 </section>
 
-<!-- 6 -->
+<!-- 6 GIFT -->
 <section class="page" id="p6">
 <div class="box">
+
 <h2>A Mystery Gift 🎁</h2>
-<div class="gift" id="gift">🎁</div>
-<div class="spark" id="spark">✨ ✨ ✨</div>
+
+<div class="giftArea">
+
+<div class="giftBox" id="giftBox">
+
+<div class="giftBase"></div>
+<div class="giftLid"></div>
+<div class="ribbonV"></div>
+
+<div class="bow">
+<i></i>
+</div>
+
+</div>
+
+<div class="giftGlow"></div>
+<div class="giftSpark">✨</div>
+
+</div>
+
 <p>There's one more little surprise waiting...</p>
+
 <button onclick="openGift()">Open Gift 🎀</button>
-<div id="giftText" style="display:none">
+
+<div id="giftText">
 <div class="message">
 <h2>Surprise! 💗</h2>
-<p>You are officially receiving unlimited bestie memories,
-random laughs and good vibes for the year ahead. ✨</p>
+<p>
+You are officially receiving unlimited bestie memories,
+random laughs and good vibes for the year ahead. ✨
+</p>
 </div>
 </div>
+
 <button onclick="go(7)">Next →</button>
+
 </div>
 </section>
 
 <!-- 7 -->
 <section class="page" id="p7">
 <div class="box">
+
 <div class="message">
 <h2>For You, Mahi 🤍</h2>
+
 <p>
 For the person who makes ordinary moments feel special.
 </p>
+
 <p>
 I hope you always remember how many little moments can turn
 into beautiful memories. Your laughter, your random conversations,
 and simply being yourself make you truly special.
 </p>
+
 <p>
 I hope this new year brings you countless reasons to smile,
 dreams that come closer, and moments you'll always want to remember. ✨
 </p>
+
 <p>Stay happy, stay amazing, and never stop being you. 🌷</p>
+
 <p class="signature">— Akash 🤍</p>
 </div>
+
 <button onclick="go(8)">One Last Thing →</button>
+
 </div>
 </section>
 
 <!-- 8 -->
 <section class="page" id="p8">
 <div class="box">
+
 <div style="font-size:70px">🎉🎂🤍</div>
+
 <h1>Happy Birthday, Mahi!</h1>
+
 <p>Hope this little surprise made you smile. ✨</p>
+
 <p>And once again… Happy Birthday, Mahi! 🤍</p>
+
 <button onclick="replay()">Replay ↻</button>
+
 </div>
 </section>
 
 <script>
-let current=1;
 
 function go(n){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('p'+n).classList.add('active');
-current=n;
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById('p'+n)
+.classList.add('active');
 }
 
 function openEnvelope(){
-document.getElementById('env').classList.add('open');
+document.getElementById('env')
+.classList.add('open');
 }
 
 function blowCandles(){
-document.getElementById('flames').classList.add('off');
-let p=document.getElementById('puff');
-p.classList.remove('show');
-void p.offsetWidth;
-p.classList.add('show');
+
+let cake=document.getElementById('cakeArea');
+
+if(cake.classList.contains('blowing'))return;
+
+cake.classList.add('blowing');
+
 }
 
 function openGift(){
-document.getElementById('gift').classList.add('open');
-document.getElementById('spark').classList.add('show');
+
+let gift=document.getElementById('giftBox');
+
+if(gift.classList.contains('open'))return;
+
+gift.classList.add('open');
+
 setTimeout(()=>{
-document.getElementById('giftText').style.display='block';
-},600);
+document.getElementById('giftText')
+.classList.add('show');
+},800);
+
 }
 
 function replay(){
-document.getElementById('env').classList.remove('open');
-document.getElementById('flames').classList.remove('off');
-document.getElementById('gift').classList.remove('open');
-document.getElementById('spark').classList.remove('show');
-document.getElementById('giftText').style.display='none';
+
+document.getElementById('env')
+.classList.remove('open');
+
+document.getElementById('cakeArea')
+.classList.remove('blowing');
+
+document.getElementById('giftBox')
+.classList.remove('open');
+
+document.getElementById('giftText')
+.classList.remove('show');
+
 go(1);
+
 }
 
 function heart(){
+
 let h=document.createElement('div');
+
 h.className='heart';
+
 h.textContent=Math.random()>.5?'♡':'♥';
+
 h.style.left=Math.random()*100+'vw';
-h.style.animationDuration=(5+Math.random()*4)+'s';
+
+h.style.animationDuration=
+(5+Math.random()*4)+'s';
+
 document.body.appendChild(h);
+
 setTimeout(()=>h.remove(),9000);
+
 }
+
 setInterval(heart,900);
+
 </script>
+
 </body>
-</html>
+  </html>
